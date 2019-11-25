@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha src/tests/* --require @babel/register --exit --recursive --timeout 40000",
     "lint": "eslint",
     "build": "./node_modules/.bin/babel src --out-dir lib"
   },
@@ -21,9 +21,12 @@
   "homepage": "https://github.com/gmemmy/Socialite#readme",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "core-js": "^2.6.10",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.1"
   },
   "devDependencies": {
