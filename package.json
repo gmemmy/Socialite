@@ -7,7 +7,9 @@
     "start": "nodemon --exec babel-node ./src/index.js",
     "test": "mocha src/tests/* --require @babel/register --exit --recursive --timeout 40000",
     "lint": "eslint",
-    "build": "./node_modules/.bin/babel src --out-dir lib"
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "undo:migration": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize db:migrate:undo:all",
+    "migrate": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "pg": "^7.14.0",
+    "sequelize": "^5.21.2",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
