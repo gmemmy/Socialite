@@ -58,16 +58,15 @@ export default (sequelize, DataTypes) => {
     },
   }, {
   });
-  // User.associate = (models) => {
-  //   User.hasMany(models.Request, {
-  //     foreignKey: 'userId',
-  //     onDelete: 'CASCADE',
-  //   });
-
-  //   User.belongsToMany(models.Accommodation, {
-  //     through: 'like',
-  //     as: 'Accommodation',
-  //   });
-  // };
+  User.associate = (models) => {
+    User.hasMany(models.Post, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
+    });
+    // User.hasMany(models.Comment, {
+    //   foreignKey: 'commentId',
+    //   onDelete: 'CASCADE',
+    // });
+  };
   return User;
 };
