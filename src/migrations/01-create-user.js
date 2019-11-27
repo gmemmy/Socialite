@@ -11,10 +11,6 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     hasProfile: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,

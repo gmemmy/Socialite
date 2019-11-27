@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 
 type User {
-  id: Int!,
+  id: String!,
   username: String!,
   email: String!,
   hasProfile: Boolean!,
@@ -11,10 +11,10 @@ type User {
   profileImage: String!
 }
 type Query {
-  getUser(id: Int!): User,
+  getUser(id: String!): User,
   getAllUsers: [User!]!
 }
-type Mutations {
+type Mutation {
   createUser(email: String!, username: String!): User!
 }
 `;

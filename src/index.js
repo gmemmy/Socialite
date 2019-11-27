@@ -5,7 +5,6 @@ import typeDefs from './schema/typeDefs';
 import resolvers from './schema/resolvers';
 import models from './models';
 
-
 const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
 
 dotenv.config();

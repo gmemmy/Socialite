@@ -8,7 +8,7 @@ const resolvers = {
     },
   },
 
-  Mutations: {
+  Mutation: {
     async createUser(root, { email, username }, { models }) {
       return models.User.create({
         email,
