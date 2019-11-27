@@ -1,21 +1,24 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { ApolloServer } from 'apollo-server-express';
+import typeDefs from './schema/typeDefs';
+import resolvers from './schema/resolvers';
+import models from './models';
+
+
+const server = new ApolloServer({ typeDefs, resolvers, context: { models } });
 
 dotenv.config();
-
 const app = express();
-const port = process.env.PORT || 3000;
+server.applyMiddleware({ app });
+models.sequelize.authenticate();
+
+models.sequelize.sync();
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.info(`Server is up and listening on port ${port}`);
-});
-
-app.get('/home', (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: 'Hello there',
-  });
+  console.info(`Server ready at http://localhost:ocalhost:${port}${server.graphqlPath}`);
 });
 
 export default app;

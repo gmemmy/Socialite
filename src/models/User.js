@@ -15,24 +15,6 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'First name is required.',
-        },
-      },
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'Last name is required.',
-        },
-      },
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -58,97 +40,6 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    gender: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [4],
-          msg: 'Gender must be at least 4 characters long.',
-        },
-      },
-    },
-    birthdate: {
-      type: DataTypes.DATE,
-      validate: {
-        isDate: true,
-      },
-    },
-    preferredLanguage: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [4],
-          msg: 'Language must be at least 4 characters long.',
-        },
-      },
-    },
-    preferredCurrency: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [3],
-          msg: 'Currency must be at least 3 characters long.',
-        },
-      },
-    },
-    city: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [3],
-          msg: 'City must be at least 3 characters long.',
-        },
-      },
-    },
-    state: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [3],
-          msg: 'State must be at least 3 characters long.',
-        },
-      },
-    },
-    zip: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [3],
-          msg: 'Zip must be at least 3 characters long.',
-        },
-      },
-    },
-    country: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [3],
-          msg: 'Country must be at least 3 characters long.',
-        },
-      },
-    },
-    role: {
-      type: DataTypes.ENUM(['Super Administrator', 'Travel Administrator',
-        'Travel Team Member', 'Manager', 'Requester']),
-    },
-    department: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [6],
-          msg: 'Department must be at least 6 characters long.',
-        },
-      },
-    },
-    lineManager: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [6],
-          msg: 'Line manager must be at least 6 characters long.',
-        },
-      },
-    },
     hasProfile: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -156,23 +47,6 @@ export default (sequelize, DataTypes) => {
     isVerified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
-    isSubscribed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'Password is required.',
-        },
-        len: {
-          args: [6, 150],
-          msg: 'Password must be more than 5 characters',
-        },
-      },
     },
     profileImage: {
       type: DataTypes.STRING,
@@ -182,30 +56,18 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    rememberDetails: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
   }, {
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Requests, {
-          foreignKey: 'userId',
-          as: 'users_request',
-        });
-      },
-    },
   });
+  // User.associate = (models) => {
+  //   User.hasMany(models.Request, {
+  //     foreignKey: 'userId',
+  //     onDelete: 'CASCADE',
+  //   });
 
-  User.associate = (models) => {
-    User.hasMany(models.Request, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-    });
-
-    User.belongsToMany(models.Accommodation, {
-      through: 'like',
-      as: 'Accommodation',
-    });
-  };
+  //   User.belongsToMany(models.Accommodation, {
+  //     through: 'like',
+  //     as: 'Accommodation',
+  //   });
+  // };
+  return User;
 };
